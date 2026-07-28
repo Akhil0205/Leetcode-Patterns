@@ -1,0 +1,29 @@
+class Solution {
+public:
+    string smallestPalindrome(string s) {
+        vector<int> cnt(26, 0);
+
+        for (char c : s)
+            cnt[c - 'a']++;
+
+        string left = "";
+        char mid = 0;
+
+        for (int i = 0; i < 26; i++) {
+            left += string(cnt[i] / 2, 'a' + i);
+            if (cnt[i] % 2)
+                mid = 'a' + i;
+        }
+
+        string right = left;
+        reverse(right.begin(), right.end());
+
+        if (mid)
+            return left + mid + right;
+        return left + right;
+    }
+};
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
